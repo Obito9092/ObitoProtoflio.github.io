@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>obito — Roblox Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off:#f7f6f3;
+  --ink:#141414;
+  --ink2:#3a3a3a;
+  --muted:#8a8a8a;
+  --line:#e5e4e0;
+  --accent:#2a5cff;
+  --accent-light:#eef1ff;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);line-height:1.6;overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--off);}
+::-webkit-scrollbar-thumb{background:var(--line);}
+
+/* ── NAV ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:64px;
+  background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:var(--serif);font-size:1.3rem;color:var(--ink);text-decoration:none;font-style:italic;}
+nav{display:flex;align-items:center;gap:2.5rem;}
+nav a{font-size:0.82rem;color:var(--muted);text-decoration:none;font-weight:400;letter-spacing:0.01em;transition:color 0.2s;}
+nav a:hover{color:var(--ink);}
+.nav-cta{
+  padding:0.45rem 1.1rem;
+  background:var(--ink);color:var(--white);
+  border-radius:100px;font-size:0.8rem;font-weight:500;
+  text-decoration:none;transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.75;color:var(--white);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 3rem 6rem;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.78rem;color:var(--muted);
+  margin-bottom:2.5rem;letter-spacing:0.02em;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--muted);}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(3.2rem,8vw,7.5rem);
+  font-weight:400;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  max-width:900px;
+  margin-bottom:2.5rem;
+}
+.hero h1 em{font-style:italic;color:var(--muted);}
+.hero-desc{
+  font-size:1rem;color:var(--ink2);
+  max-width:480px;line-height:1.75;
+  margin-bottom:3rem;font-weight:300;
+}
+.hero-actions{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+.btn-primary{
+  padding:0.75rem 2rem;background:var(--ink);color:var(--white);
+  border-radius:100px;font-size:0.88rem;font-weight:500;
+  text-decoration:none;transition:opacity 0.2s;
+}
+.btn-primary:hover{opacity:0.75;}
+.btn-ghost{
+  padding:0.75rem 2rem;border:1px solid var(--line);color:var(--ink2);
+  border-radius:100px;font-size:0.88rem;font-weight:400;
+  text-decoration:none;transition:all 0.2s;
+}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+.hero-stats{
+  position:absolute;right:3rem;bottom:4rem;
+  display:flex;flex-direction:column;gap:1.5rem;align-items:flex-end;
+}
+.hero-stat{}
+.hero-stat .n{
+  font-family:var(--serif);font-size:2.2rem;
+  font-weight:400;color:var(--ink);line-height:1;
+  display:block;text-align:right;
+}
+.hero-stat .l{
+  font-size:0.7rem;color:var(--muted);
+  letter-spacing:0.05em;text-align:right;display:block;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  border-bottom:1px solid var(--line);
+  padding:1.2rem 0;
+  overflow:hidden;background:var(--off);
+}
+.marquee-inner{
+  display:flex;gap:3rem;white-space:nowrap;
+  animation:scroll 18s linear infinite;
+  width:max-content;
+}
+.marquee-inner span{
+  font-size:0.75rem;color:var(--muted);letter-spacing:0.12em;
+  text-transform:uppercase;display:flex;align-items:center;gap:1rem;
+}
+.marquee-inner span::after{content:'·';color:var(--line);}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── WORK ── */
+.work{padding:6rem 3rem;}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:4rem;padding-bottom:1.5rem;
+  border-bottom:1px solid var(--line);
+}
+.section-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;line-height:1.1;}
+.section-count{font-size:0.78rem;color:var(--muted);}
+
+/* FILTERS */
+.filters{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:3rem;}
+.filt{
+  padding:0.4rem 1.1rem;border-radius:100px;
+  border:1px solid var(--line);background:transparent;
+  font-family:var(--sans);font-size:0.78rem;color:var(--muted);
+  cursor:pointer;transition:all 0.2s;
+}
+.filt:hover{border-color:var(--ink2);color:var(--ink);}
+.filt.on{background:var(--ink);color:var(--white);border-color:var(--ink);}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px;}
+.card{
+  background:var(--off);
+  padding:0;overflow:hidden;
+  display:flex;flex-direction:column;
+  cursor:pointer;text-decoration:none;color:inherit;
+  transition:background 0.25s;
+  position:relative;
+}
+.card:hover{background:#f0efec;}
+.card-media{
+  width:100%;aspect-ratio:16/9;
+  overflow:hidden;background:#e8e7e3;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.card-media img,.card-media video{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.5s ease;
+}
+.card:hover .card-media img,
+.card:hover .card-media video{transform:scale(1.04);}
+.card-media .no-media{
+  font-size:3rem;opacity:0.12;
+  font-family:var(--serif);font-style:italic;color:var(--ink);
+}
+.card-body{padding:1.5rem;}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;}
+.card-tag{
+  font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;
+}
+.card-num{font-size:0.65rem;color:var(--muted);}
+.card h3{
+  font-family:var(--serif);font-size:1.25rem;font-weight:400;
+  margin-bottom:0.5rem;line-height:1.3;
+}
+.card p{font-size:0.8rem;color:var(--ink2);line-height:1.7;font-weight:300;}
+.card-footer{
+  padding:1rem 1.5rem;
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:0.72rem;color:var(--muted);
+}
+.card-arrow{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;transition:all 0.2s;
+}
+.card:hover .card-arrow{background:var(--ink);border-color:var(--ink);color:var(--white);}
+.card.hidden{display:none;}
+.empty{
+  grid-column:1/-1;padding:6rem;text-align:center;
+  color:var(--muted);font-size:0.85rem;
+}
+.empty a{color:var(--accent);text-decoration:none;}
+
+/* ── ABOUT ── */
+.about{
+  padding:6rem 3rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;
+  border-top:1px solid var(--line);
+  background:var(--off);
+}
+.about-left .tag{
+  font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:1.2rem;display:block;
+}
+.about-left h2{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);
+  font-weight:400;line-height:1.15;margin-bottom:1.8rem;
+}
+.about-left h2 em{font-style:italic;color:var(--muted);}
+.about-skills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2rem;}
+.skill-pill{
+  padding:0.35rem 0.9rem;border:1px solid var(--line);
+  border-radius:100px;font-size:0.75rem;color:var(--ink2);background:var(--white);
+}
+.about-right p{font-size:0.95rem;color:var(--ink2);line-height:1.85;font-weight:300;margin-bottom:1.2rem;}
+.about-right p strong{font-weight:500;color:var(--ink);}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem;}
+.stat-box{background:var(--white);padding:1.5rem;text-align:center;}
+.stat-box .n{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--ink);display:block;line-height:1;}
+.stat-box .l{font-size:0.68rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.3rem;display:block;}
+
+/* ── CTA ── */
+.cta{
+  padding:7rem 3rem;text-align:center;
+  border-top:1px solid var(--line);
+}
+.cta .tag{font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;display:block;}
+.cta h2{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:400;line-height:1.1;margin-bottom:2.5rem;}
+.cta h2 em{font-style:italic;color:var(--muted);}
+
+/* ── FOOTER ── */
+footer{
+  padding:2rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);
+  font-size:0.75rem;color:var(--muted);
+}
+footer a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+footer a:hover{color:var(--ink);}
+
+/* ── ADMIN FAB ── */
+.fab{
+  position:fixed;bottom:2rem;right:2rem;z-index:200;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--white);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;font-size:1rem;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  transition:all 0.2s;
+}
+.fab:hover{border-color:var(--ink);transform:scale(1.08);}
+
+/* ── FADE IN ── */
+.fade{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade.visible{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  header{padding:0 1.5rem;}
+  nav a:not(.nav-cta){display:none;}
+  .hero{padding:6rem 1.5rem 4rem;}
+  .hero-stats{display:none;}
+  .work{padding:4rem 1.5rem;}
+  .about{grid-template-columns:1fr;padding:4rem 1.5rem;gap:3rem;}
+  .cta{padding:5rem 1.5rem;}
+  footer{padding:1.5rem;flex-direction:column;gap:0.8rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">obito</a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="admin.html" class="nav-cta">Admin</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Available for commissions</p>
+  <h1>Roblox developer<br>building <em>real</em> things.</h1>
+  <p class="hero-desc">3+ years writing Lua scripts inside Roblox Studio. I build game systems, mechanics, UIs and full experiences — clean code that actually works.</p>
+  <div class="hero-actions">
+    <a href="#work" class="btn-primary">See my work</a>
+    <a href="#about" class="btn-ghost">About me</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="n" id="heroCount">0</span><span class="l">Projects</span></div>
+    <div class="hero-stat"><span class="n">3+</span><span class="l">Years exp.</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>Lua Scripting</span><span>Roblox Studio</span><span>Game Systems</span>
+    <span>UI Design</span><span>NPC AI</span><span>Animation</span>
+    <span>Inventory Systems</span><span>Sprint Mechanics</span><span>Cutscene Tools</span>
+    <span>Open for Hire</span>
+    <!-- duplicate for seamless loop -->
+    <span>Lua Scripting</span><span>Roblox Studio</span><span>Game Systems</span>
+    <span>UI Design</span><span>NPC AI</span><span>Animation</span>
+    <span>Inventory Systems</span><span>Sprint Mechanics</span><span>Cutscene Tools</span>
+    <span>Open for Hire</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="section-head fade">
+    <div>
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">My projects</h2>
+    </div>
+    <span class="section-count" id="sectionCount">0 projects</span>
+  </div>
+
+  <div class="filters fade">
+    <button class="filt on" data-f="all">All</button>
+    <button class="filt" data-f="Systems">Systems</button>
+    <button class="filt" data-f="UI">UI / UX</button>
+    <button class="filt" data-f="Animation">Animation</button>
+    <button class="filt" data-f="Games">Games</button>
+  </div>
+
+  <div class="grid fade" id="projectGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left fade">
+    <span class="tag">About me</span>
+    <h2>I script.<br>I build.<br><em>I deliver.</em></h2>
+    <div class="about-skills">
+      <span class="skill-pill">Lua</span>
+      <span class="skill-pill">Roblox Studio</span>
+      <span class="skill-pill">ModuleScripts</span>
+      <span class="skill-pill">RemoteEvents</span>
+      <span class="skill-pill">Tween Service</span>
+      <span class="skill-pill">UI Design</span>
+      <span class="skill-pill">NPC AI</span>
+      <span class="skill-pill">Animations</span>
+    </div>
+  </div>
+  <div class="about-right fade">
+    <p>I'm a <strong>Roblox developer</strong> with 3+ years of experience building games and systems inside Roblox Studio. I specialize in writing clean, well-structured Lua code that solves real game-design problems.</p>
+    <p>From small mechanics like sprint systems and health shops to full NPC systems, inventory managers and cutscene tools — I've built it all from scratch.</p>
+    <p>I'm currently <strong>open for commissions</strong> and collaborations. If you have a project in mind, let's talk.</p>
+    <div class="stats-grid">
+      <div class="stat-box"><span class="n">3+</span><span class="l">Years exp.</span></div>
+      <div class="stat-box"><span class="n" id="aboutCount">0</span><span class="l">Projects done</span></div>
+      <div class="stat-box"><span class="n">100%</span><span class="l">Lua</span></div>
+      <div class="stat-box"><span class="n">✓</span><span class="l">Open to hire</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta fade">
+  <span class="tag">Let's work together</span>
+  <h2>Got a project<br>in <em>mind?</em></h2>
+  <a href="https://www.roblox.com/users/search?keyword=obito9092" target="_blank" class="btn-primary">Find me on Roblox</a>
+</section>
+
+<footer>
+  <span>© 2025 obito — Roblox Developer</span>
+  <a href="admin.html">Admin panel</a>
+</footer>
+
+<a href="admin.html" class="fab" title="Admin">⚙</a>
+
+<script>
+// Fade-in on scroll
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// Filter
+document.querySelectorAll('.filt').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filt').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const f=btn.dataset.f;
+    document.querySelectorAll('.card').forEach(c=>{
+      c.classList.toggle('hidden', f!=='all' && c.dataset.cat!==f);
+    });
+  });
+});
+
+// Render projects
+function renderProjects(){
+  const projects=JSON.parse(localStorage.getItem('portfolio_projects')||'[]');
+  const n=projects.length;
+  document.getElementById('heroCount').textContent=n;
+  document.getElementById('aboutCount').textContent=n;
+  document.getElementById('sectionCount').textContent=n+' project'+(n!==1?'s':'');
+  const grid=document.getElementById('projectGrid');
+  if(!n){
+    grid.innerHTML=`<div class="empty">No projects yet. <a href="admin.html">Add from admin panel →</a></div>`;
+    return;
+  }
+  grid.innerHTML=projects.map((p,i)=>`
+    <div class="card" data-cat="${p.category}">
+      <div class="card-media">
+        ${p.videoUrl
+          ? `<video src="${p.videoUrl}" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause()"></video>`
+          : p.imageUrl
+            ? `<img src="${p.imageUrl}" alt="${p.title}" loading="lazy">`
+            : `<div class="no-media">▶</div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-tag">${p.category}</span>
+          <span class="card-num">0${i+1}</span>
+        </div>
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+      </div>
+      <div class="card-footer">
+        <span>View project</span>
+        <div class="card-arrow">→</div>
+      </div>
+    </div>
+  `).join('');
+}
+renderProjects();
+</script>
+</body>
+</html>
