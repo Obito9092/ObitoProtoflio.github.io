@@ -21,7 +21,6 @@ body{background:var(--white);color:var(--ink);font-family:var(--sans);line-heigh
 ::-webkit-scrollbar-track{background:var(--off);}
 ::-webkit-scrollbar-thumb{background:var(--line);}
 
-/* NAV */
 header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
 .logo{font-family:var(--serif);font-size:1.3rem;color:var(--ink);text-decoration:none;font-style:italic;}
 nav{display:flex;align-items:center;gap:2.5rem;}
@@ -30,7 +29,6 @@ nav a:hover{color:var(--ink);}
 .nav-cta{padding:0.45rem 1.1rem;background:var(--ink);color:var(--white)!important;border-radius:100px;font-size:0.8rem;font-weight:500;text-decoration:none;transition:opacity 0.2s;}
 .nav-cta:hover{opacity:0.75;}
 
-/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 6rem;border-bottom:1px solid var(--line);position:relative;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--muted);margin-bottom:2.5rem;letter-spacing:0.02em;opacity:0;animation:fadeUp 0.7s 0.1s forwards;}
 .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--muted);}
@@ -45,30 +43,25 @@ nav a:hover{color:var(--ink);}
 .hero-stats{position:absolute;right:3rem;bottom:4rem;display:flex;flex-direction:column;gap:1.5rem;align-items:flex-end;opacity:0;animation:fadeUp 0.7s 0.7s forwards;}
 .hero-stat .n{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--ink);line-height:1;display:block;text-align:right;}
 .hero-stat .l{font-size:0.7rem;color:var(--muted);letter-spacing:0.05em;text-align:right;display:block;}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
-/* MARQUEE */
 .marquee-wrap{border-bottom:1px solid var(--line);padding:1.2rem 0;overflow:hidden;background:var(--off);}
 .marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:scroll 20s linear infinite;width:max-content;}
 .marquee-inner span{font-size:0.75rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:1rem;}
 .marquee-inner span::after{content:'·';color:var(--line);}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* WORK */
 .work{padding:6rem 3rem;}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line);}
 .section-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
 .section-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;line-height:1.1;}
 .section-count{font-size:0.78rem;color:var(--muted);}
 
-/* FILTERS */
 .filters{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:3rem;}
 .filt{padding:0.4rem 1.1rem;border-radius:100px;border:1px solid var(--line);background:transparent;font-family:var(--sans);font-size:0.78rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
 .filt:hover{border-color:var(--ink2);color:var(--ink);}
 .filt.on{background:var(--ink);color:var(--white);border-color:var(--ink);}
 
-/* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px;}
 .card{background:var(--off);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-decoration:none;color:inherit;transition:background 0.25s;position:relative;}
 .card:hover{background:#f0efec;}
@@ -89,7 +82,6 @@ nav a:hover{color:var(--ink);}
 .empty{grid-column:1/-1;padding:6rem;text-align:center;color:var(--muted);font-size:0.85rem;}
 .empty a{color:var(--accent);text-decoration:none;}
 
-/* ABOUT */
 .about{padding:6rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;border-top:1px solid var(--line);background:var(--off);}
 .about-left .tag{font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.2rem;display:block;}
 .about-left h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;line-height:1.15;margin-bottom:1.8rem;}
@@ -103,22 +95,18 @@ nav a:hover{color:var(--ink);}
 .stat-box .n{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--ink);display:block;line-height:1;}
 .stat-box .l{font-size:0.68rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.3rem;display:block;}
 
-/* CTA */
 .cta{padding:7rem 3rem;text-align:center;border-top:1px solid var(--line);}
 .cta .tag{font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;display:block;}
 .cta h2{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:400;line-height:1.1;margin-bottom:2.5rem;}
 .cta h2 em{font-style:italic;color:var(--muted);}
 
-/* FOOTER */
 footer{padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);font-size:0.75rem;color:var(--muted);}
 footer a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
 footer a:hover{color:var(--ink);}
 
-/* FAB */
 .fab{position:fixed;bottom:2rem;right:2rem;z-index:200;width:44px;height:44px;border-radius:50%;background:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:all 0.2s;}
 .fab:hover{border-color:var(--ink);transform:scale(1.08);}
 
-/* SCROLL FADE */
 .fade{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .fade.visible{opacity:1;transform:none;}
 
@@ -226,19 +214,48 @@ footer a:hover{color:var(--ink);}
 <a href="admin.html" class="fab" title="Admin">⚙</a>
 
 <script>
+// ── MUST match the key in admin.html exactly ──────────────────
+const STORAGE_KEY = 'obito_portfolio_projects';
+
 // Scroll fade
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold: 0.1});
+}, {threshold: 0.08});
 document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-// ── RENDER PROJECTS ───────────────────────────────────────────
+// ── ACTIVE FILTER ─────────────────────────────────────────────
+let activeFilter = 'all';
+
+document.querySelectorAll('.filt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeFilter = btn.dataset.f;
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  document.querySelectorAll('#projectGrid .card').forEach(c => {
+    const match = activeFilter === 'all' || c.dataset.cat === activeFilter;
+    c.classList.toggle('hidden', !match);
+  });
+}
+
+// ── RENDER ────────────────────────────────────────────────────
 function renderProjects() {
-  const projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+  let projects = [];
+  try {
+    projects = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch(e) {
+    projects = [];
+  }
+
   const n = projects.length;
-  document.getElementById('heroCount').textContent = n;
-  document.getElementById('aboutCount').textContent = n;
+  document.getElementById('heroCount').textContent   = n;
+  document.getElementById('aboutCount').textContent  = n;
   document.getElementById('sectionCount').textContent = n + ' project' + (n !== 1 ? 's' : '');
+
   const grid = document.getElementById('projectGrid');
 
   if (!n) {
@@ -258,7 +275,7 @@ function renderProjects() {
       <div class="card-body">
         <div class="card-top">
           <span class="card-tag">${p.category}</span>
-          <span class="card-num">0${i+1}</span>
+          <span class="card-num">${String(i+1).padStart(2,'0')}</span>
         </div>
         <h3>${p.title}</h3>
         <p>${p.description}</p>
@@ -270,33 +287,19 @@ function renderProjects() {
     </div>
   `).join('');
 
-  // Re-apply active filter after render
-  const activeFilter = document.querySelector('.filt.on');
-  const f = activeFilter ? activeFilter.dataset.f : 'all';
-  document.querySelectorAll('#projectGrid .card').forEach(c => {
-    c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
-  });
+  // Apply current filter to newly rendered cards
+  applyFilter();
 }
 
-// ── FILTER ────────────────────────────────────────────────────
-document.querySelectorAll('.filt').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const f = btn.dataset.f;
-    document.querySelectorAll('#projectGrid .card').forEach(c => {
-      c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
-    });
-  });
-});
-
-// ── INIT & LIVE SYNC ─────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────
 renderProjects();
 
-// Re-render when returning from admin tab
+// Re-render when tab gets focus (coming back from admin)
 window.addEventListener('focus', renderProjects);
+
+// Re-render when storage changes (same browser, different tab)
 window.addEventListener('storage', e => {
-  if (e.key === 'portfolio_projects') renderProjects();
+  if (e.key === STORAGE_KEY) renderProjects();
 });
 </script>
 </body>
