@@ -232,22 +232,6 @@ const obs = new IntersectionObserver(entries => {
 }, {threshold: 0.1});
 document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-// ── FILTER ────────────────────────────────────────────────────
-document.querySelectorAll('.filt').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const f = btn.dataset.f;
-    document.querySelectorAll('#projectGrid .card').forEach(c => {
-      if (f === 'all' || c.dataset.cat === f) {
-        c.classList.remove('hidden');
-      } else {
-        c.classList.add('hidden');
-      }
-    });
-  });
-});
-
 // ── RENDER PROJECTS ───────────────────────────────────────────
 function renderProjects() {
   const projects = JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
@@ -256,10 +240,12 @@ function renderProjects() {
   document.getElementById('aboutCount').textContent = n;
   document.getElementById('sectionCount').textContent = n + ' project' + (n !== 1 ? 's' : '');
   const grid = document.getElementById('projectGrid');
+
   if (!n) {
     grid.innerHTML = '<div class="empty">No projects yet. <a href="admin.html">Add from admin panel →</a></div>';
     return;
   }
+
   grid.innerHTML = projects.map((p, i) => `
     <div class="card" data-cat="${p.category}">
       <div class="card-media">
@@ -283,9 +269,35 @@ function renderProjects() {
       </div>
     </div>
   `).join('');
+
+  // Re-apply active filter after render
+  const activeFilter = document.querySelector('.filt.on');
+  const f = activeFilter ? activeFilter.dataset.f : 'all';
+  document.querySelectorAll('#projectGrid .card').forEach(c => {
+    c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
+  });
 }
 
+// ── FILTER ────────────────────────────────────────────────────
+document.querySelectorAll('.filt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.f;
+    document.querySelectorAll('#projectGrid .card').forEach(c => {
+      c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
+    });
+  });
+});
+
+// ── INIT & LIVE SYNC ─────────────────────────────────────────
 renderProjects();
+
+// Re-render when returning from admin tab
+window.addEventListener('focus', renderProjects);
+window.addEventListener('storage', e => {
+  if (e.key === 'portfolio_projects') renderProjects();
+});
 </script>
 </body>
 </html>
