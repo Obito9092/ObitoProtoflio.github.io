@@ -8,106 +8,63 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --white:#ffffff;--off:#f7f6f3;--ink:#141414;--ink2:#3a3a3a;
+  --white:#fff;--off:#f7f6f3;--ink:#141414;--ink2:#3a3a3a;
   --muted:#8a8a8a;--line:#e5e4e0;
   --accent:#2a5cff;--accent-bg:#eef1ff;
-  --danger:#e53935;--danger-bg:#fff0f0;
-  --success:#1a7f4b;--success-bg:#edfaf3;
+  --danger:#e53935;--success:#1a7f4b;
   --serif:'Instrument Serif',Georgia,serif;
   --sans:'DM Sans',sans-serif;
 }
 body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:100vh;}
 
 /* LOGIN */
-#loginScreen{
-  position:fixed;inset:0;background:var(--off);
-  display:flex;align-items:center;justify-content:center;z-index:1000;
-}
-.login-card{
-  background:var(--white);border:1px solid var(--line);
-  padding:3rem;width:380px;border-radius:16px;
-  box-shadow:0 4px 32px rgba(0,0,0,0.06);
-}
+#loginScreen{position:fixed;inset:0;background:var(--off);display:flex;align-items:center;justify-content:center;z-index:1000;}
+.login-card{background:var(--white);border:1px solid var(--line);padding:3rem;width:380px;border-radius:16px;box-shadow:0 4px 32px rgba(0,0,0,0.06);}
 .login-card h1{font-family:var(--serif);font-size:1.9rem;font-weight:400;margin-bottom:0.3rem;}
-.login-card p{font-size:0.82rem;color:var(--muted);margin-bottom:2.5rem;}
+.login-card .sub{font-size:0.82rem;color:var(--muted);margin-bottom:2.5rem;}
 .field{margin-bottom:1.2rem;}
 .field label{display:block;font-size:0.72rem;font-weight:500;color:var(--ink2);margin-bottom:0.45rem;}
-.field input{
-  width:100%;padding:0.7rem 0.9rem;border:1px solid var(--line);
-  border-radius:8px;font-family:var(--sans);font-size:0.88rem;
-  outline:none;transition:border 0.2s;background:var(--white);color:var(--ink);
-}
+.field input{width:100%;padding:0.7rem 0.9rem;border:1px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:0.88rem;outline:none;transition:border 0.2s;background:var(--white);color:var(--ink);}
 .field input:focus{border-color:var(--accent);}
-.btn-login{
-  width:100%;padding:0.8rem;background:var(--ink);color:var(--white);
-  border:none;border-radius:100px;font-family:var(--sans);font-size:0.88rem;
-  font-weight:500;cursor:pointer;transition:opacity 0.2s;
-}
+.btn-login{width:100%;padding:0.8rem;background:var(--ink);color:var(--white);border:none;border-radius:100px;font-family:var(--sans);font-size:0.88rem;font-weight:500;cursor:pointer;transition:opacity 0.2s;}
 .btn-login:hover{opacity:0.8;}
 .login-err{font-size:0.75rem;color:var(--danger);margin-top:0.8rem;text-align:center;display:none;}
 
 /* APP */
 #app{display:none;}
-
-/* TOP BAR */
-.topbar{
-  background:var(--white);border-bottom:1px solid var(--line);
-  padding:0 2rem;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:50;
-}
-.topbar-left{display:flex;align-items:center;gap:1.5rem;}
-.topbar-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--ink);}
-.topbar-sep{width:1px;height:20px;background:var(--line);}
-.topbar-label{font-size:0.78rem;color:var(--muted);}
-.topbar-right{display:flex;align-items:center;gap:0.8rem;}
-.btn-sm{
-  padding:0.38rem 1rem;border-radius:100px;font-family:var(--sans);
-  font-size:0.78rem;cursor:pointer;transition:all 0.2s;border:1px solid var(--line);
-  background:transparent;color:var(--muted);
-}
+.topbar{background:var(--white);border-bottom:1px solid var(--line);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.topbar-left{display:flex;align-items:center;gap:1.2rem;}
+.topbar-logo{font-family:var(--serif);font-size:1.1rem;font-style:italic;}
+.topbar-sep{width:1px;height:18px;background:var(--line);}
+.topbar-tag{font-size:0.75rem;color:var(--muted);}
+.topbar-right{display:flex;align-items:center;gap:0.7rem;}
+.btn-sm{padding:0.38rem 1rem;border-radius:100px;font-family:var(--sans);font-size:0.78rem;cursor:pointer;transition:all 0.2s;border:1px solid var(--line);background:transparent;color:var(--muted);}
 .btn-sm:hover{border-color:var(--ink);color:var(--ink);}
 .btn-sm.solid{background:var(--ink);color:var(--white);border-color:var(--ink);}
 .btn-sm.solid:hover{opacity:0.8;}
 
-/* LAYOUT */
 .layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 60px);}
-.sidebar{
-  background:var(--white);border-right:1px solid var(--line);
-  padding:1.5rem 0;
-}
-.sidebar-group{margin-bottom:1.5rem;}
-.sidebar-label{
-  font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;
-  text-transform:uppercase;padding:0 1.2rem;margin-bottom:0.5rem;display:block;
-}
-.slink{
-  width:100%;display:flex;align-items:center;gap:0.7rem;
-  padding:0.55rem 1.2rem;background:none;border:none;
-  font-family:var(--sans);font-size:0.83rem;color:var(--muted);
-  cursor:pointer;transition:all 0.15s;text-align:left;
-}
+.sidebar{background:var(--white);border-right:1px solid var(--line);padding:1.5rem 0;}
+.sidebar-lbl{font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;padding:0 1.2rem;margin-bottom:0.5rem;display:block;}
+.slink{width:100%;display:flex;align-items:center;gap:0.7rem;padding:0.55rem 1.2rem;background:none;border:none;font-family:var(--sans);font-size:0.83rem;color:var(--muted);cursor:pointer;transition:all 0.15s;text-align:left;}
 .slink:hover{color:var(--ink);background:var(--off);}
 .slink.on{color:var(--accent);background:var(--accent-bg);font-weight:500;}
-.slink .icon{font-size:0.9rem;opacity:0.7;width:18px;}
 
-/* MAIN */
 .main{padding:2.5rem;overflow-y:auto;}
-.panel{display:none;}
-.panel.on{display:block;}
+.panel{display:none;}.panel.on{display:block;}
 .page-title{font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:0.3rem;}
 .page-sub{font-size:0.83rem;color:var(--muted);margin-bottom:2.5rem;}
 
-/* STAT CARDS */
+/* STAT ROW */
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;}
 .stat-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:1.4rem;}
-.stat-card .n{font-family:var(--serif);font-size:2.2rem;font-weight:400;color:var(--ink);line-height:1;}
+.stat-card .n{font-family:var(--serif);font-size:2.2rem;font-weight:400;line-height:1;}
 .stat-card .l{font-size:0.7rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;}
 
-/* SECTION BOX */
+/* BOX */
 .box{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:1.5rem;}
 .box-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;}
-.box-title{font-size:0.83rem;font-weight:500;color:var(--ink);}
+.box-title{font-size:0.85rem;font-weight:500;}
 .box-body{padding:1.5rem;}
 
 /* FORM */
@@ -115,67 +72,39 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
 .form-full{grid-column:1/-1;}
 .fg{display:flex;flex-direction:column;gap:0.4rem;}
 .fg label{font-size:0.72rem;font-weight:500;color:var(--ink2);}
-.fg input,.fg textarea,.fg select{
-  padding:0.65rem 0.85rem;border:1px solid var(--line);border-radius:8px;
-  font-family:var(--sans);font-size:0.85rem;color:var(--ink);
-  background:var(--white);outline:none;transition:border 0.2s;
-}
+.fg input,.fg textarea,.fg select{padding:0.65rem 0.85rem;border:1px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:0.85rem;color:var(--ink);background:var(--white);outline:none;transition:border 0.2s;width:100%;}
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--accent);}
 .fg textarea{resize:vertical;min-height:85px;line-height:1.6;}
-.fg select option{background:var(--white);}
 
 /* UPLOAD */
-.upload-area{
-  border:2px dashed var(--line);border-radius:10px;
-  padding:2.5rem;text-align:center;cursor:pointer;
-  transition:all 0.2s;position:relative;
-}
+.upload-area{border:2px dashed var(--line);border-radius:10px;padding:2.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
 .upload-area:hover,.upload-area.drag{border-color:var(--accent);background:var(--accent-bg);}
-.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-area .up-icon{font-size:1.6rem;margin-bottom:0.6rem;opacity:0.25;}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.up-icon{font-size:1.6rem;margin-bottom:0.6rem;opacity:0.25;}
 .upload-area p{font-size:0.8rem;color:var(--muted);}
-.upload-area .up-name{font-size:0.78rem;color:var(--accent);margin-top:0.5rem;font-weight:500;}
+.up-hint{font-size:0.7rem;color:var(--muted);margin-top:0.3rem;}
+.up-name{font-size:0.78rem;color:var(--accent);margin-top:0.5rem;font-weight:500;min-height:1.2em;}
 .progress{height:4px;background:var(--line);border-radius:2px;margin-top:1rem;display:none;overflow:hidden;}
-.progress-fill{height:100%;background:var(--accent);width:0%;transition:width 0.3s;border-radius:2px;}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width 0.2s;border-radius:2px;}
+.up-status{font-size:0.72rem;color:var(--muted);margin-top:0.5rem;text-align:center;min-height:1.2em;}
 
-/* FORM ACTIONS */
 .form-actions{display:flex;gap:0.8rem;margin-top:1.8rem;}
-.btn-save{
-  padding:0.7rem 2rem;background:var(--ink);color:var(--white);
-  border:none;border-radius:100px;font-family:var(--sans);
-  font-size:0.85rem;font-weight:500;cursor:pointer;transition:opacity 0.2s;
-}
+.btn-save{padding:0.7rem 2rem;background:var(--ink);color:var(--white);border:none;border-radius:100px;font-family:var(--sans);font-size:0.85rem;font-weight:500;cursor:pointer;transition:opacity 0.2s;}
 .btn-save:hover{opacity:0.8;}
-.btn-cancel{
-  padding:0.7rem 1.5rem;background:transparent;
-  border:1px solid var(--line);border-radius:100px;
-  font-family:var(--sans);font-size:0.85rem;color:var(--muted);
-  cursor:pointer;transition:all 0.2s;
-}
+.btn-cancel{padding:0.7rem 1.5rem;background:transparent;border:1px solid var(--line);border-radius:100px;font-family:var(--sans);font-size:0.85rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
 .btn-cancel:hover{border-color:var(--ink);color:var(--ink);}
 
 /* PROJECT ITEMS */
-.proj-item{
-  display:grid;grid-template-columns:48px 1fr auto;
-  align-items:center;gap:1.2rem;
-  padding:1rem 1.5rem;border-bottom:1px solid var(--line);
-}
+.proj-item{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:1.2rem;padding:1rem 1.5rem;border-bottom:1px solid var(--line);}
 .proj-item:last-child{border-bottom:none;}
-.proj-thumb{
-  width:48px;height:36px;border-radius:6px;
-  background:var(--off);overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;flex-shrink:0;
-}
+.proj-thumb{width:48px;height:36px;border-radius:6px;background:var(--off);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
 .proj-thumb img{width:100%;height:100%;object-fit:cover;}
 .proj-info h4{font-size:0.88rem;font-weight:500;margin-bottom:0.15rem;}
 .proj-info p{font-size:0.72rem;color:var(--muted);}
 .proj-actions{display:flex;gap:0.4rem;}
-.tag-badge{
-  display:inline-block;padding:0.18rem 0.6rem;border-radius:100px;
-  font-size:0.62rem;font-weight:500;letter-spacing:0.04em;
-  background:var(--accent-bg);color:var(--accent);
-}
+.tag-badge{display:inline-block;padding:0.18rem 0.6rem;border-radius:100px;font-size:0.62rem;font-weight:500;background:var(--accent-bg);color:var(--accent);}
+.empty-state{padding:3rem;text-align:center;color:var(--muted);font-size:0.82rem;}
+.empty-state button{background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.82rem;font-family:var(--sans);}
 
 /* SETTINGS */
 .settings-section{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;}
@@ -183,21 +112,12 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
 .info-row{display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--line);font-size:0.82rem;}
 .info-row:last-child{border-bottom:none;}
 .info-row span:first-child{color:var(--muted);}
-.danger-zone h3{color:var(--danger);}
-.btn-danger{
-  padding:0.6rem 1.4rem;background:transparent;border:1px solid var(--danger);
-  color:var(--danger);border-radius:100px;font-family:var(--sans);
-  font-size:0.82rem;cursor:pointer;transition:all 0.2s;
-}
+.danger h3{color:var(--danger);}
+.btn-danger{padding:0.6rem 1.4rem;background:transparent;border:1px solid var(--danger);color:var(--danger);border-radius:100px;font-family:var(--sans);font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
 .btn-danger:hover{background:var(--danger);color:var(--white);}
 
 /* TOAST */
-.toast{
-  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);
-  padding:0.75rem 1.8rem;border-radius:100px;font-size:0.82rem;font-weight:500;
-  opacity:0;transition:all 0.35s;z-index:9999;pointer-events:none;
-  box-shadow:0 4px 20px rgba(0,0,0,0.12);
-}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);padding:0.75rem 1.8rem;border-radius:100px;font-size:0.82rem;font-weight:500;opacity:0;transition:all 0.35s;z-index:9999;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,0.12);}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 .toast.ok{background:var(--ink);color:var(--white);}
 .toast.err{background:var(--danger);color:var(--white);}
@@ -206,7 +126,6 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
   .layout{grid-template-columns:1fr;}
   .sidebar{display:flex;flex-wrap:wrap;gap:0.3rem;padding:0.8rem;border-right:none;border-bottom:1px solid var(--line);}
   .slink{width:auto;padding:0.4rem 0.9rem;border-radius:100px;border:1px solid var(--line);}
-  .slink.on{background:var(--accent-bg);}
   .form-row{grid-template-columns:1fr;}
   .stat-row{grid-template-columns:1fr 1fr;}
 }
@@ -214,27 +133,25 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
     <h1>Admin panel</h1>
-    <p>Sign in to manage your portfolio.</p>
+    <p class="sub">Sign in to manage your portfolio.</p>
     <div class="field">
       <label>Password</label>
-      <input type="password" id="pw" placeholder="Enter your password" onkeydown="if(event.key==='Enter')login()">
+      <input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
     </div>
     <button class="btn-login" onclick="login()">Sign in</button>
     <p class="login-err" id="err">Wrong password. Try again.</p>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div class="topbar">
     <div class="topbar-left">
       <span class="topbar-logo">obito</span>
       <span class="topbar-sep"></span>
-      <span class="topbar-label">Admin Panel</span>
+      <span class="topbar-tag">Admin Panel</span>
     </div>
     <div class="topbar-right">
       <span style="font-size:0.78rem;color:var(--muted)" id="topCount">0 projects</span>
@@ -245,12 +162,12 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
 
   <div class="layout">
     <div class="sidebar">
-      <div class="sidebar-group">
-        <span class="sidebar-label">Menu</span>
-        <button class="slink on" onclick="go('dash')"><span class="icon">◈</span>Dashboard</button>
-        <button class="slink" onclick="go('add')"><span class="icon">+</span>Add Project</button>
-        <button class="slink" onclick="go('manage')"><span class="icon">≡</span>Manage</button>
-        <button class="slink" onclick="go('settings')"><span class="icon">⚙</span>Settings</button>
+      <div style="margin-bottom:1.5rem;">
+        <span class="sidebar-lbl">Menu</span>
+        <button class="slink on" onclick="go('dash')">◈ Dashboard</button>
+        <button class="slink" onclick="go('add')">＋ Add Project</button>
+        <button class="slink" onclick="go('manage')">≡ Manage</button>
+        <button class="slink" onclick="go('settings')">⚙ Settings</button>
       </div>
     </div>
 
@@ -277,7 +194,7 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
       <!-- ADD PROJECT -->
       <div class="panel" id="p-add">
         <h2 class="page-title" id="formTitle">Add project</h2>
-        <p class="page-sub">Fill in the details. Videos up to 50 MB are supported.</p>
+        <p class="page-sub">Fill in the details. Videos up to <strong>1 GB</strong> are supported.</p>
         <div class="box">
           <div class="box-body">
             <div class="form-row">
@@ -303,18 +220,19 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
                 <input type="text" id="f-img" placeholder="https://...">
               </div>
               <div class="fg form-full">
-                <label>Upload video (optional — max 50 MB)</label>
+                <label>Upload video (optional — max 1 GB)</label>
                 <div class="upload-area" id="dropZone">
                   <input type="file" id="f-file" accept="video/*" onchange="handleFile(this)">
                   <div class="up-icon">▶</div>
                   <p>Drop video here or click to browse</p>
-                  <p style="font-size:0.7rem;color:var(--muted);margin-top:0.3rem;">MP4, WebM · max 50 MB</p>
+                  <p class="up-hint">MP4, WebM · max 1 GB</p>
                   <p class="up-name" id="upName"></p>
                 </div>
                 <div class="progress" id="prog"><div class="progress-fill" id="progFill"></div></div>
+                <p class="up-status" id="upStatus"></p>
               </div>
               <div class="fg form-full">
-                <label>Or paste a video URL</label>
+                <label>Or paste a video URL (GitHub raw, Google Drive direct link, etc.)</label>
                 <input type="text" id="f-vidurl" placeholder="https://raw.githubusercontent.com/...">
               </div>
             </div>
@@ -337,31 +255,28 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
       <div class="panel" id="p-settings">
         <h2 class="page-title">Settings</h2>
         <p class="page-sub">Manage password and site data.</p>
-
         <div class="settings-section">
           <h3>Change password</h3>
           <div class="form-row" style="margin-bottom:1rem;">
             <div class="fg"><label>Current password</label><input type="password" id="s-cur" placeholder="Current"></div>
             <div class="fg"><label>New password</label><input type="password" id="s-new" placeholder="At least 6 characters"></div>
           </div>
-          <div class="fg" style="max-width:280px;margin-bottom:1rem;">
+          <div class="fg" style="max-width:280px;margin-bottom:1.2rem;">
             <label>Confirm new password</label>
-            <input type="password" id="s-conf" placeholder="Repeat new password">
+            <input type="password" id="s-conf" placeholder="Repeat">
           </div>
           <button class="btn-save" onclick="changePw()">Update password</button>
         </div>
-
         <div class="settings-section">
           <h3>Site info</h3>
-          <div class="info-row"><span>Portfolio owner</span><span>obito9092</span></div>
+          <div class="info-row"><span>Portfolio</span><span>obito9092</span></div>
           <div class="info-row"><span>GitHub Pages URL</span><span>obito9092.github.io</span></div>
           <div class="info-row"><span>Total projects</span><span id="s-count">0</span></div>
-          <div class="info-row"><span>Storage used</span><span id="s-size">—</span></div>
+          <div class="info-row"><span>Data size</span><span id="s-size">—</span></div>
         </div>
-
-        <div class="settings-section danger-zone">
+        <div class="settings-section danger">
           <h3>Danger zone</h3>
-          <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">This will permanently delete all projects.</p>
+          <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">Permanently delete all projects — cannot be undone.</p>
           <button class="btn-danger" onclick="nukeAll()">Delete all projects</button>
         </div>
       </div>
@@ -374,206 +289,258 @@ body{background:var(--off);color:var(--ink);font-family:var(--sans);min-height:1
 
 <script>
 // ── AUTH ──────────────────────────────────────────────────────
-const DEF = 'admin123';
-const getpw = () => localStorage.getItem('adm_pw') || DEF;
+const DEF_PW = 'admin123';
+const getpw  = () => localStorage.getItem('adm_pw') || DEF_PW;
 
-function login(){
-  if(document.getElementById('pw').value === getpw()){
+function login() {
+  if (document.getElementById('pw').value === getpw()) {
     sessionStorage.setItem('ok','1');
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('app').style.display='block';
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
     refresh();
   } else {
-    document.getElementById('err').style.display='block';
+    document.getElementById('err').style.display = 'block';
   }
 }
-function logout(){ sessionStorage.removeItem('ok'); location.reload(); }
-
-if(sessionStorage.getItem('ok')==='1'){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('app').style.display='block';
+function logout() { sessionStorage.removeItem('ok'); location.reload(); }
+if (sessionStorage.getItem('ok') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
 }
 
 // ── DATA ──────────────────────────────────────────────────────
-const getP = () => JSON.parse(localStorage.getItem('portfolio_projects')||'[]');
-const setP = a => localStorage.setItem('portfolio_projects', JSON.stringify(a));
+const getP = () => JSON.parse(localStorage.getItem('portfolio_projects') || '[]');
+const setP = a  => localStorage.setItem('portfolio_projects', JSON.stringify(a));
 
 // ── PANELS ────────────────────────────────────────────────────
-function go(name){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.slink').forEach(b=>b.classList.remove('on'));
-  document.getElementById('p-'+name).classList.add('on');
+function go(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.slink').forEach(b => b.classList.remove('on'));
+  document.getElementById('p-' + name).classList.add('on');
   document.querySelector(`.slink[onclick="go('${name}')"]`).classList.add('on');
-  if(name==='manage') renderManage();
-  if(name==='dash')   renderDash();
-  if(name==='settings') renderSettings();
+  if (name === 'manage')  renderManage();
+  if (name === 'dash')    renderDash();
+  if (name === 'settings') renderSettings();
 }
 
-function refresh(){
-  const p=getP();
-  document.getElementById('topCount').textContent=p.length+' project'+(p.length!==1?'s':'');
+function refresh() {
+  const p = getP();
+  document.getElementById('topCount').textContent = p.length + ' project' + (p.length !== 1 ? 's' : '');
   renderDash();
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────
-function renderDash(){
-  const p=getP();
-  document.getElementById('d-total').textContent=p.length;
-  document.getElementById('d-cats').textContent=new Set(p.map(x=>x.category)).size;
-  document.getElementById('d-vids').textContent=p.filter(x=>x.videoUrl).length;
-  const list=document.getElementById('dashList');
-  const recent=[...p].reverse().slice(0,6);
-  list.innerHTML= recent.length
-    ? recent.map(x=>`
-      <div class="proj-item">
-        <div class="proj-thumb">
-          ${x.imageUrl ? `<img src="${x.imageUrl}">` : '▶'}
-        </div>
-        <div class="proj-info">
-          <h4>${x.title}</h4>
-          <p><span class="tag-badge">${x.category}</span> ${x.videoUrl?'· 🎬 video':''}</p>
-        </div>
-        <div class="proj-actions">
-          <button class="btn-sm" onclick="editP('${x.id}')">Edit</button>
-        </div>
-      </div>`).join('')
-    : '<div style="padding:3rem;text-align:center;color:var(--muted);font-size:0.82rem;">No projects yet. <button onclick="go(\'add\')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.82rem;font-family:var(--sans)">Add your first →</button></div>';
+function renderDash() {
+  const p = getP();
+  document.getElementById('d-total').textContent = p.length;
+  document.getElementById('d-cats').textContent  = new Set(p.map(x => x.category)).size;
+  document.getElementById('d-vids').textContent  = p.filter(x => x.videoUrl).length;
+  const list = document.getElementById('dashList');
+  const recent = [...p].reverse().slice(0, 6);
+  list.innerHTML = recent.length
+    ? recent.map(x => `
+        <div class="proj-item">
+          <div class="proj-thumb">${x.imageUrl ? `<img src="${x.imageUrl}">` : '▶'}</div>
+          <div class="proj-info">
+            <h4>${x.title}</h4>
+            <p><span class="tag-badge">${x.category}</span>${x.videoUrl ? ' · 🎬 video' : ''}</p>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-sm" onclick="editP('${x.id}')">Edit</button>
+          </div>
+        </div>`).join('')
+    : '<div class="empty-state">No projects yet. <button onclick="go(\'add\')">Add your first →</button></div>';
 }
 
 // ── FORM ──────────────────────────────────────────────────────
-let editId=null, uploadedUrl=null;
+let editId = null, uploadedUrl = null;
 
-function clearForm(){
-  editId=null; uploadedUrl=null;
-  ['f-title','f-desc','f-img','f-vidurl'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-file').value='';
-  document.getElementById('f-cat').value='Systems';
-  document.getElementById('upName').textContent='';
-  document.getElementById('prog').style.display='none';
-  document.getElementById('formTitle').textContent='Add project';
+function clearForm() {
+  editId = null; uploadedUrl = null;
+  ['f-title','f-desc','f-img','f-vidurl'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-file').value = '';
+  document.getElementById('f-cat').value  = 'Systems';
+  document.getElementById('upName').textContent   = '';
+  document.getElementById('upStatus').textContent = '';
+  document.getElementById('prog').style.display   = 'none';
+  document.getElementById('formTitle').textContent = 'Add project';
 }
-function cancelEdit(){ clearForm(); go('manage'); }
+function cancelEdit() { clearForm(); go('manage'); }
 
-function editP(id){
-  const p=getP().find(x=>x.id===id);
-  if(!p) return;
-  editId=id;
-  document.getElementById('f-title').value=p.title;
-  document.getElementById('f-desc').value=p.description;
-  document.getElementById('f-img').value=p.imageUrl||'';
-  document.getElementById('f-vidurl').value=p.videoUrl||'';
-  document.getElementById('f-cat').value=p.category;
-  document.getElementById('formTitle').textContent='Edit project';
+function editP(id) {
+  const p = getP().find(x => x.id === id);
+  if (!p) return;
+  editId = id;
+  document.getElementById('f-title').value  = p.title;
+  document.getElementById('f-desc').value   = p.description;
+  document.getElementById('f-img').value    = p.imageUrl  || '';
+  document.getElementById('f-vidurl').value = p.videoUrl  || '';
+  document.getElementById('f-cat').value    = p.category;
+  document.getElementById('formTitle').textContent = 'Edit project';
   go('add');
 }
 
-function handleFile(input){
-  const file=input.files[0];
-  if(!file) return;
-  if(file.size > 50*1024*1024){ toast('File too large! Max 50 MB.','err'); input.value=''; return; }
-  document.getElementById('upName').textContent='📎 '+file.name;
-  const bar=document.getElementById('prog'), fill=document.getElementById('progFill');
-  bar.style.display='block'; fill.style.width='0%';
-  const r=new FileReader();
-  r.onprogress=e=>{ if(e.lengthComputable) fill.style.width=(e.loaded/e.total*90)+'%'; };
-  r.onload=e=>{ fill.style.width='100%'; uploadedUrl=e.target.result; setTimeout(()=>bar.style.display='none',600); toast('Video ready ✓'); };
-  r.onerror=()=>toast('Error reading file','err');
-  r.readAsDataURL(file);
+// ── FILE UPLOAD (up to 1 GB) ──────────────────────────────────
+const MAX_BYTES = 1 * 1024 * 1024 * 1024; // 1 GB
+
+function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  if (file.size > MAX_BYTES) {
+    toast('File too large! Max is 1 GB.', 'err');
+    input.value = '';
+    return;
+  }
+
+  const sizeMB = (file.size / 1024 / 1024).toFixed(1);
+  document.getElementById('upName').textContent = '📎 ' + file.name + ' (' + sizeMB + ' MB)';
+  document.getElementById('upStatus').textContent = 'Reading file…';
+
+  const bar  = document.getElementById('prog');
+  const fill = document.getElementById('progFill');
+  bar.style.display = 'block';
+  fill.style.width  = '0%';
+
+  const reader = new FileReader();
+
+  reader.onprogress = e => {
+    if (e.lengthComputable) {
+      const pct = Math.round(e.loaded / e.total * 95);
+      fill.style.width = pct + '%';
+      const loadedMB = (e.loaded / 1024 / 1024).toFixed(1);
+      document.getElementById('upStatus').textContent = 'Loading… ' + loadedMB + ' MB / ' + sizeMB + ' MB';
+    }
+  };
+
+  reader.onload = e => {
+    fill.style.width = '100%';
+    uploadedUrl = e.target.result;
+    document.getElementById('upStatus').textContent = '✓ Video ready to save';
+    setTimeout(() => { bar.style.display = 'none'; }, 800);
+    toast('Video loaded ✓');
+  };
+
+  reader.onerror = () => {
+    toast('Error reading file', 'err');
+    document.getElementById('upStatus').textContent = 'Error reading file.';
+  };
+
+  reader.readAsDataURL(file);
 }
 
-function save(){
-  const title=document.getElementById('f-title').value.trim();
-  const desc=document.getElementById('f-desc').value.trim();
-  const cat=document.getElementById('f-cat').value;
-  const img=document.getElementById('f-img').value.trim();
-  const vidurl=document.getElementById('f-vidurl').value.trim();
-  if(!title||!desc){ toast('Title and description are required','err'); return; }
-  const finalVid=uploadedUrl||vidurl||'';
-  const projects=getP();
-  if(editId){
-    const idx=projects.findIndex(p=>p.id===editId);
-    if(idx>-1) projects[idx]={...projects[idx],title,description:desc,category:cat,imageUrl:img,videoUrl:finalVid};
+// ── SAVE PROJECT ──────────────────────────────────────────────
+function save() {
+  const title  = document.getElementById('f-title').value.trim();
+  const desc   = document.getElementById('f-desc').value.trim();
+  const cat    = document.getElementById('f-cat').value;
+  const img    = document.getElementById('f-img').value.trim();
+  const vidurl = document.getElementById('f-vidurl').value.trim();
+
+  if (!title || !desc) { toast('Title and description are required', 'err'); return; }
+
+  const finalVid = uploadedUrl || vidurl || '';
+  const projects = getP();
+
+  if (editId) {
+    const idx = projects.findIndex(p => p.id === editId);
+    if (idx > -1) {
+      projects[idx] = { ...projects[idx], title, description: desc, category: cat, imageUrl: img, videoUrl: finalVid };
+    }
     toast('Project updated ✓');
   } else {
-    projects.push({id:Date.now().toString(),title,description:desc,category:cat,imageUrl:img,videoUrl:finalVid,createdAt:new Date().toISOString()});
+    projects.push({
+      id: Date.now().toString(),
+      title, description: desc, category: cat,
+      imageUrl: img, videoUrl: finalVid,
+      createdAt: new Date().toISOString()
+    });
     toast('Project added ✓');
   }
-  setP(projects); clearForm(); refresh(); go('manage');
+
+  setP(projects);
+  clearForm();
+  refresh();
+  go('manage');
 }
 
 // ── MANAGE ────────────────────────────────────────────────────
-function renderManage(){
-  const p=getP();
-  const box=document.getElementById('manageBox');
-  box.innerHTML= p.length
-    ? p.map((x,i)=>`
-      <div class="proj-item">
-        <div class="proj-thumb">
-          ${x.imageUrl ? `<img src="${x.imageUrl}">` : '▶'}
-        </div>
-        <div class="proj-info">
-          <h4>${x.title}</h4>
-          <p><span class="tag-badge">${x.category}</span>&nbsp;&nbsp;${x.videoUrl?'🎬 video':'no video'}</p>
-        </div>
-        <div class="proj-actions">
-          <button class="btn-sm" onclick="editP('${x.id}')">Edit</button>
-          <button class="btn-sm" onclick="delP('${x.id}')" style="color:var(--danger)">Delete</button>
-        </div>
-      </div>`).join('')
-    : '<div style="padding:3rem;text-align:center;color:var(--muted);font-size:0.82rem;">No projects yet.</div>';
+function renderManage() {
+  const p = getP();
+  const box = document.getElementById('manageBox');
+  box.innerHTML = p.length
+    ? p.map((x, i) => `
+        <div class="proj-item">
+          <div class="proj-thumb">${x.imageUrl ? `<img src="${x.imageUrl}">` : '▶'}</div>
+          <div class="proj-info">
+            <h4>${x.title}</h4>
+            <p><span class="tag-badge">${x.category}</span>&nbsp;${x.videoUrl ? '🎬 video' : 'no video'}</p>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-sm" onclick="editP('${x.id}')">Edit</button>
+            <button class="btn-sm" style="color:var(--danger)" onclick="delP('${x.id}')">Delete</button>
+          </div>
+        </div>`).join('')
+    : '<div class="empty-state">No projects yet. <button onclick="go(\'add\')">Add your first →</button></div>';
 }
 
-function delP(id){
-  if(!confirm('Delete this project?')) return;
-  setP(getP().filter(p=>p.id!==id));
+function delP(id) {
+  if (!confirm('Delete this project?')) return;
+  setP(getP().filter(p => p.id !== id));
   refresh(); renderManage(); toast('Deleted');
 }
 
 // ── SETTINGS ──────────────────────────────────────────────────
-function renderSettings(){
-  const p=getP();
-  document.getElementById('s-count').textContent=p.length;
-  const sz=new Blob([JSON.stringify(p)]).size;
-  document.getElementById('s-size').textContent=sz>1048576?(sz/1048576).toFixed(1)+'MB':(sz/1024).toFixed(0)+'KB';
+function renderSettings() {
+  const p = getP();
+  document.getElementById('s-count').textContent = p.length;
+  const sz = new Blob([JSON.stringify(p)]).size;
+  document.getElementById('s-size').textContent = sz > 1048576
+    ? (sz / 1048576).toFixed(1) + ' MB'
+    : (sz / 1024).toFixed(0) + ' KB';
 }
-function changePw(){
-  const c=document.getElementById('s-cur').value;
-  const n=document.getElementById('s-new').value;
-  const f=document.getElementById('s-conf').value;
-  if(c!==getpw()){ toast('Current password wrong','err'); return; }
-  if(n.length<6){ toast('Min 6 characters','err'); return; }
-  if(n!==f){ toast('Passwords do not match','err'); return; }
-  localStorage.setItem('adm_pw',n);
-  ['s-cur','s-new','s-conf'].forEach(id=>document.getElementById(id).value='');
+
+function changePw() {
+  const c = document.getElementById('s-cur').value;
+  const n = document.getElementById('s-new').value;
+  const f = document.getElementById('s-conf').value;
+  if (c !== getpw())   { toast('Current password wrong', 'err'); return; }
+  if (n.length < 6)    { toast('Min 6 characters', 'err'); return; }
+  if (n !== f)         { toast('Passwords do not match', 'err'); return; }
+  localStorage.setItem('adm_pw', n);
+  ['s-cur','s-new','s-conf'].forEach(id => document.getElementById(id).value = '');
   toast('Password updated ✓');
 }
-function nukeAll(){
-  if(!confirm('Delete ALL projects? This cannot be undone.')) return;
+
+function nukeAll() {
+  if (!confirm('Delete ALL projects? Cannot be undone.')) return;
   setP([]); refresh(); renderSettings(); toast('All projects deleted');
 }
 
-// ── TOAST ────────────────────────────────────────────────────
-function toast(msg,type='ok'){
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.className='toast '+type+' show';
-  setTimeout(()=>el.classList.remove('show'),2800);
+// ── TOAST ─────────────────────────────────────────────────────
+function toast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast ' + type + ' show';
+  setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ── DRAG ─────────────────────────────────────────────────────
-const dz=document.getElementById('dropZone');
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
-dz.addEventListener('drop',e=>{
+// ── DRAG & DROP ───────────────────────────────────────────────
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => {
   e.preventDefault(); dz.classList.remove('drag');
-  const f=e.dataTransfer.files[0];
-  if(f&&f.type.startsWith('video/')){
-    const inp=document.getElementById('f-file');
-    const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('video/')) {
+    const inp = document.getElementById('f-file');
+    const dt = new DataTransfer(); dt.items.add(f); inp.files = dt.files;
     handleFile(inp);
   }
 });
 
-if(sessionStorage.getItem('ok')==='1') refresh();
+// Init
+if (sessionStorage.getItem('ok') === '1') refresh();
 </script>
 </body>
 </html>
